@@ -77,13 +77,6 @@ a{ color:inherit; }
   margin:0 auto;
   padding: 18px var(--pad) 56px var(--pad);
 }
-.site-footer{ border-top:1px solid var(--border); }
-.footer-inner{
-  max-width: var(--max);
-  margin:0 auto;
-  padding:18px var(--pad);
-  opacity:.8;
-}
 
 /* full-bleed section */
 .sm-edge{
@@ -780,4 +773,372 @@ body.sm-menu-open{ overflow: hidden; }
   height: auto;
   border-radius: 18px;
   border: 1px solid rgba(0,0,0,.06);
+}
+
+/* =========================
+   Footer – minimal
+   ========================= */
+
+.sm-footer{
+  margin-top: 10px;
+  padding: 64px var(--pad) 36px var(--pad);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(17,17,17,.58);
+  background: #fff;
+}
+
+/* layout */
+.sm-footer-inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr .7fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.sm-footer a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   Column 1: brand + tagline + social
+   ========================= */
+
+.sm-footer-col strong{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.3;
+  color: rgba(17,17,17,.90);
+}
+
+/* tagline */
+.sm-footer-col:first-child p{
+  margin: 14px 0 0 0;
+  max-width: 56ch;
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: .02em;
+}
+
+/* social icons */
+.sm-footer-social{
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sm-footer-social a{
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(17,17,17,.45);
+  transition: color .2s ease, opacity .2s ease, transform .2s ease;
+}
+
+.sm-footer-social a:hover{
+  color: rgba(17,17,17,.85);
+  transform: translateY(-1px);
+}
+
+.sm-footer-social svg{
+  width: 24px;
+  height: 24px;
+  display: block;
+  fill: currentColor;
+}
+
+/* =========================
+   Column 2: contact info
+   ========================= */
+
+.sm-footer-col:nth-child(2) p{
+  margin: 0 0 12px 0;
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: .02em;
+}
+
+.sm-footer-col:nth-child(2) p:last-child{
+  margin-bottom: 0;
+}
+
+/* =========================
+   Column 3: footer navigation
+   ========================= */
+
+.sm-footer-col:nth-child(3){
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sm-footer-col:nth-child(3) a{
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(17,17,17,.60);
+  transition: color .2s ease, opacity .2s ease;
+}
+
+.sm-footer-col:nth-child(3) a:hover{
+  color: rgba(17,17,17,.90);
+}
+
+.sm-footer-col:nth-child(3) br{
+  display: none;
+}
+
+/* =========================
+   Bottom copyright
+   ========================= */
+
+.sm-footer-bottom{
+  margin-top: 44px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .08em;
+  color: rgba(17,17,17,.40);
+}
+
+.sm-footer-bottom a{
+  opacity: .8;
+}
+
+.sm-footer-bottom a:hover{
+  opacity: 1;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 980px){
+  .sm-footer-inner{
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+  }
+
+  .sm-footer-col:nth-child(3){
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 560px){
+  .sm-footer{
+    padding: 52px var(--pad) 30px var(--pad);
+  }
+
+  .sm-footer-inner{
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sm-footer-col strong{
+    letter-spacing: .06em;
+  }
+}
+
+/* =========================
+   Legal pages typography
+   (privacy & terms only)
+   ========================= */
+
+body.page.privacy,
+body.page.terms{
+  background: #fff;
+}
+
+/* 主内容宽度与节奏 */
+body.page.privacy main,
+body.page.terms main{
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 72px var(--pad) 96px var(--pad);
+}
+
+/* 标题 */
+body.page.privacy h1,
+body.page.terms h1{
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: .04em;
+  margin: 0 0 28px 0;
+  color: rgba(17,17,17,.92);
+}
+
+body.page.privacy h2,
+body.page.terms h2{
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 56px 0 16px 0;
+  color: rgba(17,17,17,.75);
+}
+
+/* 正文段落 */
+body.page.privacy p,
+body.page.terms p{
+  font-size: 15px;
+  line-height: 1.95;
+  letter-spacing: .01em;
+  margin: 0 0 16px 0;
+  color: rgba(17,17,17,.62);
+}
+
+/* 列表 */
+body.page.privacy ul,
+body.page.terms ul{
+  margin: 12px 0 20px 0;
+  padding-left: 18px;
+}
+
+body.page.privacy li,
+body.page.terms li{
+  font-size: 15px;
+  line-height: 1.85;
+  margin-bottom: 8px;
+  color: rgba(17,17,17,.60);
+}
+
+/* 强调文本 */
+body.page.privacy strong,
+body.page.terms strong{
+  font-weight: 600;
+  color: rgba(17,17,17,.85);
+}
+
+/* 链接 */
+body.page.privacy a,
+body.page.terms a{
+  color: rgba(17,17,17,.80);
+  text-decoration: none;
+  position: relative;
+}
+
+body.page.privacy a::after,
+body.page.terms a::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: .25;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+
+body.page.privacy a:hover::after,
+body.page.terms a:hover::after{
+  transform: scaleX(1);
+}
+
+/* 移动端 */
+@media (max-width: 560px){
+  body.page.privacy main,
+  body.page.terms main{
+    padding: 56px var(--pad) 72px var(--pad);
+  }
+
+  body.page.privacy h1,
+  body.page.terms h1{
+    font-size: 22px;
+  }
+}
+
+/* legal pages only */
+body.page.privacy main,
+body.page.terms main{
+  max-width: 72ch;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 72px var(--pad) 96px var(--pad);
+}
+
+.legal-header h1{
+  margin: 0 0 10px 0;
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: .04em;
+  color: rgba(17,17,17,.92);
+}
+
+.legal-updated{
+  margin: 0 0 28px 0;
+  font-size: 13px;
+  letter-spacing: .06em;
+  color: rgba(17,17,17,.48);
+}
+
+.legal-body h2{
+  margin: 52px 0 14px 0;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(17,17,17,.75);
+}
+
+.legal-body p,
+.legal-body li{
+  font-size: 15px;
+  line-height: 1.95;
+  color: rgba(17,17,17,.62);
+}
+
+.legal-body ul{
+  margin: 12px 0 18px 0;
+  padding-left: 18px;
+}
+
+.legal-body a{
+  color: rgba(17,17,17,.80);
+  text-decoration: none;
+  position: relative;
+}
+
+.legal-body a::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: .25;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .2s ease;
+}
+
+.legal-body a:hover::after{
+  transform: scaleX(1);
+}
+
+@media (max-width: 560px){
+  body.page.privacy main,
+  body.page.terms main{
+    padding: 56px var(--pad) 72px var(--pad);
+  }
+  .legal-header h1{ font-size: 22px; }
 }

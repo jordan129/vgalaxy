@@ -1,0 +1,14 @@
+<article class="legal-page">
+  <div class="legal-content">
+    <header class="legal-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.lastUpdated }}
+      <p class="legal-updated">Last updated: {{ . }}</p>
+      {{ end }}
+    </header>
+
+    <section class="legal-body">
+      {{ .Content }}
+    </section>
+  </div>
+</article>

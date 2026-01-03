@@ -1,0 +1,24 @@
+{{ define "main" }}
+
+{{- $kind := .Params.page_kind | default "page" -}}
+
+{{- if eq $kind "legal" -}}
+  {{ partial "page/legal.html" . }}
+
+{{- else if eq $kind "menu" -}}
+  {{ partial "page/menu.html" . }}
+
+{{- else if eq $kind "offers" -}}
+  {{ partial "page/offers.html" . }}
+
+{{- else if eq $kind "lunch_specials" -}}
+  {{ partial "page/lunch_specials.html" . }}
+
+{{- else if eq $kind "contact" -}}
+  {{ partial "page/contact.html" . }}
+
+{{- else -}}
+  {{ partial "page/default.html" . }}
+{{- end -}}
+
+{{ end }}

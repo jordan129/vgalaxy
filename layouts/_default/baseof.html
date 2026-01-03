@@ -2,8 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{{ if .IsHome }}{{ site.Data.site.brand.name }}{{ else }}{{ .Title }} · {{ site.Data.site.brand.name }}{{ end }}</title>
+
+  {{- $brand := site.Data.site.brand.name -}}
+  <title>
+    {{- if .IsHome -}}
+      {{- $brand -}}
+    {{- else -}}
+      {{- .Title }} · {{- $brand -}}
+    {{- end -}}
+  </title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {{- $desc := "" -}}
+  {{- with .Params.description -}}
+    {{- $desc = . -}}
+  {{- else -}}
+    {{- with site.Data.site.brand.tagline -}}
+      {{- $desc = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $desc -}}
+  <meta name="description" content="{{ $desc }}">
+  {{- end -}}
+
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:site_name" content="{{ $brand }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ $brand }}{{ else }}{{ .Title }} · {{ $brand }}{{ end }}">
+  {{- if $desc -}}
+  <meta property="og:description" content="{{ $desc }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  {{- end -}}
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- if you later add a social share image, set .Params.og_image -->
+  {{- with .Params.og_image -}}
+    <meta property="og:image" content="{{ . | absURL }}">
+    <meta name="twitter:image" content="{{ . | absURL }}">
+  {{- end -}}
+
   <link rel="stylesheet" href="/css/site.css">
 </head>
 
@@ -13,29 +54,26 @@
 
 <header class="site-header">
   <div class="nav-wrap">
-    <a class="brand" href="/" aria-label="{{ site.Data.site.brand.name }} home">
-      <img class="brand-logo" src="{{ site.Data.site.brand.logo }}" alt="{{ site.Data.site.brand.name }}">
+    <a class="brand" href="/" aria-label="{{ $brand }} home">
+      <img class="brand-logo" src="{{ site.Data.site.brand.logo }}" alt="{{ $brand }}">
     </a>
 
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-<button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+    <nav class="nav-right" aria-label="primary">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="{{ "contact/" | relURL }}">Contact</a>
+      <a class="nav-link" href="{{ "menu/" | relURL }}">Menu</a>
+      <a class="nav-link" href="{{ "lunch_specials/" | relURL }}">Lunch specials</a>
 
-<nav class="nav-right" aria-label="primary">
-  <a class="nav-link" href="/">Home</a>
-  <a class="nav-link" href="{{ "contact/" | relURL }}">Contact</a>
-  <a class="nav-link" href="{{ "menu/" | relURL }}">Menu</a>
-  <a class="nav-link" href="{{ "lunch_specials/" | relURL }}">Lunch Specials</a>
+      <a class="nav-link nav-cta nav-cta-mobile"
+         href="{{ site.Data.site.links.reservation_url }}"
+         target="_blank" rel="noopener">Reservation</a>
+    </nav>
 
-
-  <a class="nav-link nav-cta nav-cta-mobile"
-     href="{{ site.Data.site.links.reservation_url }}"
-     target="_blank" rel="noopener">Reservation</a>
-</nav>
-
-<div class="nav-backdrop" aria-hidden="true"></div>
-
+    <div class="nav-backdrop" aria-hidden="true"></div>
   </div>
 </header>
 
@@ -44,11 +82,13 @@
 </main>
 
 <footer class="site-footer">
-  <div class="footer-inner">© {{ now.Year }} {{ site.Data.site.brand.name }}</div>
+  {{ partial "footer.html" . }}
 </footer>
 
-<script src="/js/slider.js" defer></script>
 <script src="/js/nav.js" defer></script>
+{{ if .IsHome }}
+<script src="/js/slider.js" defer></script>
+{{ end }}
 
 </body>
 </html>

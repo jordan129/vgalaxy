@@ -1,0 +1,72 @@
+{{ define "main" }}
+{{ $m := site.Data.menu }}
+
+<section class="sm-section" aria-label="menu page">
+  <h1 style="margin:0 0 18px 0;">{{ .Title }}</h1>
+
+  {{/* ===== Food ===== */}}
+  {{ with $m.food }}
+  <section class="sm-section" id="food-menu" aria-label="food menu">
+    <h2 style="margin:0 0 12px 0;">{{ .title }}</h2>
+
+    <div class="sm-booklet">
+      <div class="sm-viewer">
+        <button class="sm-menu-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="food">‹</button>
+        <img class="sm-viewer-img sm-fade"
+             data-target="food"
+             data-pages='{{ jsonify .pages }}'
+             src="{{ index .pages 0 }}"
+             alt="food menu page">
+        <button class="sm-menu-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="food">›</button>
+      </div>
+    </div>
+
+    <div class="sm-thumbs" data-target="food">
+      {{ range $i, $p := .pages }}
+        <button class="sm-thumb {{ if eq $i 0 }}is-active{{ end }}" type="button" data-index="{{ $i }}" data-src="{{ $p }}" aria-label="food page {{ add $i 1 }}">
+          <img src="{{ $p }}" alt="food thumbnail {{ add $i 1 }}">
+        </button>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* ===== Drinks ===== */}}
+  {{ with $m.drinks }}
+  <section class="sm-section" id="drinks-menu" aria-label="drinks menu">
+    <h2 style="margin:0 0 12px 0;">{{ .title }}</h2>
+
+    <div class="sm-booklet">
+      <div class="sm-viewer">
+        <button class="sm-menu-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="drinks">‹</button>
+        <img class="sm-viewer-img sm-fade"
+             data-target="drinks"
+             data-pages='{{ jsonify .pages }}'
+             src="{{ index .pages 0 }}"
+             alt="drinks menu page">
+        <button class="sm-menu-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="drinks">›</button>
+      </div>
+    </div>
+
+    <div class="sm-thumbs" data-target="drinks">
+      {{ range $i, $p := .pages }}
+        <button class="sm-thumb {{ if eq $i 0 }}is-active{{ end }}" type="button" data-index="{{ $i }}" data-src="{{ $p }}" aria-label="drinks page {{ add $i 1 }}">
+          <img src="{{ $p }}" alt="drinks thumbnail {{ add $i 1 }}">
+        </button>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+</section>
+
+{{/* fullscreen lightbox */}}
+<div class="sm-lightbox" id="sm-lightbox" aria-label="fullscreen menu viewer">
+  <button class="sm-menu-arrow sm-menu-arrow-left sm-menu-arrow-fs" type="button" aria-label="previous page fullscreen" id="sm-fs-prev">‹</button>
+  <img id="sm-lightbox-img" src="" alt="menu fullscreen page">
+  <button class="sm-menu-arrow sm-menu-arrow-right sm-menu-arrow-fs" type="button" aria-label="next page fullscreen" id="sm-fs-next">›</button>
+  <div class="sm-fs-indicator" id="sm-fs-indicator">page</div>
+</div>
+
+<script src="/js/menu.js" defer></script>
+{{ end }}

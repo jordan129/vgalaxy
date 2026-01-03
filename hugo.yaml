@@ -2,3 +2,14 @@ baseURL: "https://sushimoka.co.uk/"
 languageCode: "en-gb"
 title: "Sushi Moka"
 disableKinds: ["taxonomy", "term"]
+
+# 建议：餐厅站一般不需要 RSS
+outputs:
+  home: ["HTML", "SITEMAP"]
+  section: ["HTML"]
+  page: ["HTML"]
+
+params:
+  social:
+    instagram: "https://www.instagram.com/sushimokauk/"
+    facebook: "https://www.facebook.com/sushimokauk/"
