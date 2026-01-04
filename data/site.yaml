@@ -1,42 +1,44 @@
 # data/site.yaml
 
 brand:
-  name: "Sushi Moka"
+  name: "The Golden Bund"
   logo: "/images/logo.jpg"
-  phone: "+44-203-336-3106"
-  streetAddress: "Ram Quarter, 24 Ryeland Blvd"
+  phone: "0203 638 0559"
+  streetAddress: "139-151 Marylebone Road"
   addressLocality: "London"
-  postalCode: "SW18 1UN"
+  postalCode: "NW1 5QE"
   addressCountry: "GB"
 
   geo:
-    latitude: "51.4575"
-    longitude: "-0.1956"
+    latitude: "51.5210"
+    longitude: "-0.1651"
 
   # social accounts (kept here for data completeness)
   social:
-    instagram: "https://www.instagram.com/sushimokauk/"
-    facebook: "https://www.facebook.com/sushimokauk/"
+    instagram: "https://thegoldenbund.co.uk/"
+    facebook: "https://thegoldenbund.co.uk/"
 
   # reservation
-  reservation_url: "https://web.dojo.app/create_booking/vendor/NPazRARQHh5GSHGYGmyseeNnpbOgrkI6aXaxJo81SF0_restaurant"
+  reservation_url: "https://web.dojo.app/create_booking/vendor/sqsGd0gpxLucm1ofglwOIUzwrHfdJHPt1lpMzB9O0t8_restaurant"
 
   # -------------------------
   # opening hours
   # -------------------------
   # 1) human-readable lines (safe for schema openingHours string array, or UI)
   openingHoursText:
-    - "Tu-Fr 12:00-15:00"
-    - "Tu-Fr 17:00-22:00"
-    - "Sa 12:00-22:00"
-    - "Su 12:00-21:00"
-    - "Mo Closed"
+    - "Mo-Sa 12:00-15:00"
+    - "Mo-Sa 17:00-22:00"
+    - "Su Closed"
 
   # 2) structured specification (recommended for schema: openingHoursSpecification)
   # schema dayOfWeek should be: Monday..Sunday (or schema.org/Monday URLs)
   openingHoursSpec:
     - dayOfWeek: "Monday"
-      closed: true
+      opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Monday"
+      opens: "17:00"
+      closes: "22:00"
 
     - dayOfWeek: "Tuesday"
       opens: "12:00"
@@ -68,24 +70,26 @@ brand:
 
     - dayOfWeek: "Saturday"
       opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Saturday"
+      opens: "17:00"
       closes: "22:00"
 
     - dayOfWeek: "Sunday"
-      opens: "12:00"
-      closes: "21:00"
+      closed: true
 
   # 3) legacy map (keep for backward compatibility with existing templates)
   openingHoursLegacy:
-    monday: "Closed"
+    monday: "12:00-15:00, 17:00-22:00"
     tuesday: "12:00-15:00, 17:00-22:00"
     wednesday: "12:00-15:00, 17:00-22:00"
     thursday: "12:00-15:00, 17:00-22:00"
     friday: "12:00-15:00, 17:00-22:00"
-    saturday: "12:00-22:00"
-    sunday: "12:00-21:00"
+    saturday: "12:00-15:00, 17:00-22:00"
+    sunday: "Closed"
 
 links:
-  reservation_url: "https://web.dojo.app/create_booking/vendor/NPazRARQHh5GSHGYGmyseeNnpbOgrkI6aXaxJo81SF0_restaurant"
+  reservation_url: "https://web.dojo.app/create_booking/vendor/sqsGd0gpxLucm1ofglwOIUzwrHfdJHPt1lpMzB9O0t8_restaurant"
 
 contact:
   page_title: "Discover Our Culinary Experience"
@@ -93,19 +97,17 @@ contact:
 
   left_title: "Contact us"
   address_lines:
-    - "Ram Quarter, 24 Ryeland Blvd, London SW18 1UN"
-  phone: "+442033363106"
-  phone_display: "0203 336 3106"
-  email: "info@sushimoka.co.uk"
+    - "139-151 Marylebone Road, London NW1 5QE"
+  phone: "+442036380559"
+  phone_display: "0203 638 0559"
+  email: "info@thegoldenbund.co.uk"
 
   right_title: "Opening hours"
   hours_lines:
-    - "Tuesday to Friday: 12:00-15:00 & 17:00-22:00"
-    - "Saturday: 12:00-22:00"
-    - "Sunday: 12:00-21:00"
-    - "Monday: Closed"
+    - "Monday to Saturday: 12:00-15:00 & 17:00-22:00"
+    - "Sunday: Closed"
 
-  map_iframe_src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.0334273401113!2d-0.19299280000000002!3d51.4575427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760f55ab7558e1%3A0xbd9d6c0d52c0f9a6!2sSushi%20Moka!5e0!3m2!1sen!2sus!4v1767019757854!5m2!1sen!2sus"
+  map_iframe_src: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.574999329034!2d-0.1650573231203639!3d51.52101270970855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ba7cd457935%3A0xca88f1539fe0e50b!2sThe%20Golden%20Bund!5e0!3m2!1sen!2sus!4v1767535629193!5m2!1sen!2sus"
   map_height_home: 360
   map_height_page: 420
 

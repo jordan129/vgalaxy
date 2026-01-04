@@ -1,4 +1,4 @@
-/* Sushi Moka service worker (lightweight) */
+/* The Golden Bund service worker (lightweight) */
 const CACHE_NAME = "sm-static-v1";
 const ASSETS = [
   "/",

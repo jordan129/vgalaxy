@@ -2,14 +2,15 @@ slider:
   images:
     - /images/hero/1.jpg
     - /images/hero/2.jpg
-    - /images/hero/3.jpg
-    - /images/hero/4.jpg
+    - /images/hero/3.png
+    - /images/hero/4.png
+    - /images/hero/5.jpg
   interval_ms: 4000
 
 banner:
   kicker: OMAKASE
-  title: "Sushi Moka - Where Authentic Japanese Craft Meets Modern Innovation"
-  lead: "We handpick premium ingredients from trusted local purveyors, ensuring that the spirit of Japan’s rich culinary tradition is preserved in every bite. Through meticulous craftsmanship, seasonal sensibility, and an uncompromising commitment to quality, we elevate your dining experience to the zenith of culinary excellence."
+  title: "The Golden Bund: A Taste of Shanghai in London"
+  lead: "Experience the flavours of Shanghai at The Golden Bund, where every dish reflects a tradition of culinary refinement. A distinguished Shanghai-style restaurant in London, The Golden Bund has earned acclaim for its authentic flavours and meticulous craftsmanship. With an unwavering commitment to quality and authenticity, it is poised to become a must-visit destination for Chinese cuisine enthusiasts in the city."
   image: /images/hero2.jpg
 
 grid_image: /images/grid.jpg
@@ -17,18 +18,21 @@ grid_image: /images/grid.jpg
 recommended:
   title: "Quality & Tasty Meals We Serve"
   cards:
-    - image: "/images/dish1.jpg"
-      title: "Miso Black Cod"
-      text: "Indulge in the exquisite flavors of the Miso Black Cod, and embark on a culinary journey that will leave you craving its exceptional taste long after your last bite."
-    - image: "/images/dish2.jpg"
-      title: "Wagyu Sukiyaki"
+    - image: "/images/dish1.png"
+      title: "Sweet and Sour Pork Ribs"
+      text: "Crispy pork ribs glazed in a classic sweet and sour sauce, balancing caramelized sugar, aged vinegar, and subtle soy notes for a rich yet refreshing finish."
+
+    - image: "/images/dish2.png"
+      title: "Si Xi Braised Wheat Gluten"
       text: "Enjoy tender slices of premium beef simmered in a savory broth alongside a medley of fresh vegetables, creating a truly unforgettable dining experience."
-    - image: "/images/dish3.jpg"
-      title: "Aburi Sushi Set"
-      text: "Indulge in a selection of perfectly seared and expertly crafted sushi bites, showcasing a harmonious blend of flavors and textures."
-    - image: "/images/dish4.jpg"
-      title: "Summer Vibe"
-      text: "We have a seasonal drinks menu, exceptional cocktails, alcohol-free mocktails and premium Japanese whisky."
+
+    - image: "/images/dish3.png"
+      title: "Pork Belly & Bamboo Shoots"
+      text: "Slow-braised pork belly cooked with dried bamboo shoots from Tianmu Mountain, offering deep umami, tender meat, and a fragrant, comforting richness."
+
+    - image: "/images/dish4.png"
+      title: "Five-spice Smoked Fish"
+      text: "Crisp marinated fish lightly smoked and infused with Chinese five-spice, delivering a delicate balance of smokiness, sweetness, and aromatic warmth."
 
 two_images:
   title: "Weekly Highlights"

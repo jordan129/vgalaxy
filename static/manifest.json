@@ -1,7 +1,7 @@
 {
-  "name": "Sushi Moka",
-  "short_name": "Sushi Moka",
-  "description": "Modern Japanese dining experience",
+  "name": "The Golden Bund",
+  "short_name": "The Golden Bund",
+  "description": "Shanghai Dining in London",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

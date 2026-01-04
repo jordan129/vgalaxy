@@ -1,18 +1,18 @@
 ---
 page_kind: legal
-title: "Terms & Conditions | Sushi Moka"
-description: "Review Sushi Moka terms and conditions for website use, reservations, dining policies, liability, and governing law in England and Wales."
+title: "Terms & Conditions | The Golden Bund"
+description: "Review The Golden Bund terms and conditions for website use, reservations, dining policies, liability, and governing law in England and Wales."
 lastUpdated: "2026-01-03"
 ---
 
-These terms and conditions govern your use of the **Sushi Moka** website and related services. By accessing the website or making a reservation, you agree to these terms.
+These terms and conditions govern your use of the **The Golden Bund** website and related services. By accessing the website or making a reservation, you agree to these terms.
 
 ## About us
 
-**Sushi Moka**  
-Ram Quarter, 24 Ryeland Blvd, London SW18 1UN, United Kingdom  
-info@sushimoka.co.uk  
-0203 336 3106
+**The Golden Bund**  
+139-151 Marylebone Road, London NW1 5QE  
+info@thegoldenbund.co.uk  
+0203 638 0559
 
 ## Use of this website
 
@@ -32,7 +32,7 @@ Please inform us of allergies and dietary requirements. We cannot guarantee a co
 
 ## Intellectual property
 
-Website content is owned by or licensed to Sushi Moka. No commercial reuse is permitted without written consent.
+Website content is owned by or licensed to The Golden Bund. No commercial reuse is permitted without written consent.
 
 ## Limitation of liability
 
@@ -44,7 +44,7 @@ Governed by the laws of **England and Wales**. Disputes are subject to the exclu
 
 ## Contact
 
-Sushi Moka  
-Ram Quarter, 24 Ryeland Blvd, London SW18 1UN  
-info@sushimoka.co.uk  
-0203 336 3106
+The Golden Bund
+139-151 Marylebone Road, London NW1 5QE  
+info@thegoldenbund.co.uk  
+0203 638 0559

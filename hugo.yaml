@@ -1,20 +1,20 @@
-baseURL: "https://sushimoka.co.uk/"
+baseURL: "https://thegoldenbund.co.uk/"
 languageCode: "en-gb"
-title: "Sushi Moka"
+title: "The Golden Bund"
 disableKinds: ["taxonomy", "term"]
 enableRobotsTXT: true
 
 params:
-  phone: "0203 336 3106"
-  address: "Ram Quarter, 24 Ryeland Blvd, London SW18 1UN"
-  streetAddress: "Ram Quarter, 24 Ryeland Blvd"
+  phone: "0203 638 0559"
+  address: "139-151 Marylebone Road, London NW1 5QE"
+  streetAddress: "139-151 Marylebone Road"
   addressLocality: "London"
-  postalCode: "SW18 1UN"
+  postalCode: "NW1 5QE"
   addressCountry: "GB"
-  hours: "Monday to Friday: 12:00-15:00 & 17:00-22:00, Saturday: 12:00-22:00, Sunday: 12:00-21:00"
+  hours: "Monday to Saturday: 12:00-15:00 & 17:00-22:00; Sunday: Closed"
   social:
-    instagram: "https://www.instagram.com/sushimokauk/"
-    facebook: "https://www.facebook.com/sushimokauk/"
+    instagram: "https://thegoldenbund.co.uk/"
+    facebook: "https://thegoldenbund.co.uk/"
 
 sitemap:
   changefreq: weekly

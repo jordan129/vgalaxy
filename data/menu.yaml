@@ -1,5 +1,5 @@
 food:
-  title: "Food Menu"
+#  title: "Food Menu"
   pages:
   - /images/menu/food/1.jpg
   - /images/menu/food/2.jpg
@@ -16,10 +16,10 @@ food:
   - /images/menu/food/13.jpg
   - /images/menu/food/14.jpg
 
-drinks:
-  title: "Drinks Menu"
-  pages:
-  - /images/menu/drinks/1.jpg
-  - /images/menu/drinks/2.jpg
-  - /images/menu/drinks/3.jpg
-  - /images/menu/drinks/4.jpg
+#drinks:
+#  title: "Drinks Menu"
+#  pages:
+#  - /images/menu/drinks/1.jpg
+#  - /images/menu/drinks/2.jpg
+#  - /images/menu/drinks/3.jpg
+#  - /images/menu/drinks/4.jpg

@@ -1,17 +1,17 @@
 ---
 page_kind: legal
-title: "Privacy Policy | Sushi Moka"
-description: "Learn how Sushi Moka collects, uses, and protects personal data when you visit our website, contact us, or make a reservation, in line with UK data protection law."
+title: "Privacy Policy | The Golden Bund"
+description: "Learn how The Golden Bund collects, uses, and protects personal data when you visit our website, contact us, or make a reservation, in line with UK data protection law."
 lastUpdated: "2026-01-03"
 ---
 
-This privacy policy explains how **Sushi Moka** (“We”, “Us”, “Our”) collects, uses, and protects personal data when you visit our website, contact us, or make a reservation.
+This privacy policy explains how **The Golden Bund** (“We”, “Us”, “Our”) collects, uses, and protects personal data when you visit our website, contact us, or make a reservation.
 
 ## Who we are
 
-**Data controller:** Sushi Moka  
-**Address:** Ram Quarter, 24 Ryeland Blvd, London SW18 1UN, United Kingdom  
-**Contact:** info@sushimoka.co.uk | 0203 336 3106
+**Data controller:** The Golden Bund  
+**Address:** 139-151 Marylebone Road, London NW1 5QE  
+**Contact:** info@thegoldenbund.co.uk | 0203 638 0559
 
 ## What personal data we collect
 
@@ -60,7 +60,7 @@ You have rights under UK data protection law, including access, correction, dele
 
 ## Contact
 
-Sushi Moka  
-Ram Quarter, 24 Ryeland Blvd, London SW18 1UN  
-info@sushimoka.co.uk  
-0203 336 3106
+The Golden Bund  
+139-151 Marylebone Road, London NW1 5QE  
+ info@thegoldenbund.co.uk
+0203 638 0559
