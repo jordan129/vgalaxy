@@ -43,11 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function start() {
-    timer = setInterval(next, interval);
+    // Only start the interval if it's not already running
+    if (timer === null) {
+      timer = setInterval(next, interval);
+    }
   }
 
   function stop() {
     clearInterval(timer);
+    timer = null;
   }
 
   function restart() {

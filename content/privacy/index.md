@@ -1,6 +1,6 @@
 ---
 page_kind: legal
-title: "Privacy policy | Sushi Moka"
+title: "Privacy Policy | Sushi Moka"
 description: "Learn how Sushi Moka collects, uses, and protects personal data when you visit our website, contact us, or make a reservation, in line with UK data protection law."
 lastUpdated: "2026-01-03"
 ---

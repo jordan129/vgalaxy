@@ -1,6 +1,6 @@
 ---
 page_kind: legal
-title: "Terms & conditions | Sushi Moka"
+title: "Terms & Conditions | Sushi Moka"
 description: "Review Sushi Moka terms and conditions for website use, reservations, dining policies, liability, and governing law in England and Wales."
 lastUpdated: "2026-01-03"
 ---
