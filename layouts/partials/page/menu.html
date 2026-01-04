@@ -9,13 +9,13 @@
 
     <div class="sm-booklet">
       <div class="sm-viewer">
-        <button class="sm-menu-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="food">‹</button>
+        <button class="sm-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="food">‹</button>
         <img class="sm-viewer-img sm-fade"
              data-target="food"
              data-pages='{{ jsonify .pages }}'
              src="{{ index .pages 0 }}"
              alt="food menu page">
-        <button class="sm-menu-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="food">›</button>
+        <button class="sm-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="food">›</button>
       </div>
     </div>
 
@@ -35,13 +35,13 @@
 
     <div class="sm-booklet">
       <div class="sm-viewer">
-        <button class="sm-menu-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="drinks">‹</button>
+        <button class="sm-arrow sm-menu-arrow-left" type="button" aria-label="previous page" data-target="drinks">‹</button>
         <img class="sm-viewer-img sm-fade"
              data-target="drinks"
              data-pages='{{ jsonify .pages }}'
              src="{{ index .pages 0 }}"
              alt="drinks menu page">
-        <button class="sm-menu-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="drinks">›</button>
+        <button class="sm-arrow sm-menu-arrow-right" type="button" aria-label="next page" data-target="drinks">›</button>
       </div>
     </div>
 
@@ -57,8 +57,8 @@
 </section>
 
 <div class="sm-lightbox" id="sm-lightbox" aria-label="fullscreen menu viewer">
-  <button class="sm-menu-arrow sm-menu-arrow-left sm-menu-arrow-fs" type="button" aria-label="previous page fullscreen" id="sm-fs-prev">‹</button>
+  <button class="sm-arrow sm-menu-arrow-left sm-menu-arrow-fs" type="button" aria-label="previous page fullscreen" id="sm-fs-prev">‹</button>
   <img id="sm-lightbox-img" src="" alt="menu fullscreen page">
-  <button class="sm-menu-arrow sm-menu-arrow-right sm-menu-arrow-fs" type="button" aria-label="next page fullscreen" id="sm-fs-next">›</button>
+  <button class="sm-arrow sm-menu-arrow-right sm-menu-arrow-fs" type="button" aria-label="next page fullscreen" id="sm-fs-next">›</button>
   <div class="sm-fs-indicator" id="sm-fs-indicator">page</div>
 </div>

@@ -8,13 +8,74 @@ brand:
   addressLocality: "London"
   postalCode: "SW18 1UN"
   addressCountry: "GB"
+
   geo:
     latitude: "51.4575"
     longitude: "-0.1956"
+
+  # social accounts (kept here for data completeness)
   social:
     instagram: "https://www.instagram.com/sushimokauk/"
     facebook: "https://www.facebook.com/sushimokauk/"
-  openingHours:
+
+  # reservation
+  reservation_url: "https://web.dojo.app/create_booking/vendor/NPazRARQHh5GSHGYGmyseeNnpbOgrkI6aXaxJo81SF0_restaurant"
+
+  # -------------------------
+  # opening hours
+  # -------------------------
+  # 1) human-readable lines (safe for schema openingHours string array, or UI)
+  openingHoursText:
+    - "Tu-Fr 12:00-15:00"
+    - "Tu-Fr 17:00-22:00"
+    - "Sa 12:00-22:00"
+    - "Su 12:00-21:00"
+    - "Mo Closed"
+
+  # 2) structured specification (recommended for schema: openingHoursSpecification)
+  # schema dayOfWeek should be: Monday..Sunday (or schema.org/Monday URLs)
+  openingHoursSpec:
+    - dayOfWeek: "Monday"
+      closed: true
+
+    - dayOfWeek: "Tuesday"
+      opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Tuesday"
+      opens: "17:00"
+      closes: "22:00"
+
+    - dayOfWeek: "Wednesday"
+      opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Wednesday"
+      opens: "17:00"
+      closes: "22:00"
+
+    - dayOfWeek: "Thursday"
+      opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Thursday"
+      opens: "17:00"
+      closes: "22:00"
+
+    - dayOfWeek: "Friday"
+      opens: "12:00"
+      closes: "15:00"
+    - dayOfWeek: "Friday"
+      opens: "17:00"
+      closes: "22:00"
+
+    - dayOfWeek: "Saturday"
+      opens: "12:00"
+      closes: "22:00"
+
+    - dayOfWeek: "Sunday"
+      opens: "12:00"
+      closes: "21:00"
+
+  # 3) legacy map (keep for backward compatibility with existing templates)
+  openingHoursLegacy:
     monday: "Closed"
     tuesday: "12:00-15:00, 17:00-22:00"
     wednesday: "12:00-15:00, 17:00-22:00"
@@ -22,7 +83,6 @@ brand:
     friday: "12:00-15:00, 17:00-22:00"
     saturday: "12:00-22:00"
     sunday: "12:00-21:00"
-  reservation_url: "https://web.dojo.app/create_booking/vendor/NPazRARQHh5GSHGYGmyseeNnpbOgrkI6aXaxJo81SF0_restaurant"
 
 links:
   reservation_url: "https://web.dojo.app/create_booking/vendor/NPazRARQHh5GSHGYGmyseeNnpbOgrkI6aXaxJo81SF0_restaurant"
@@ -31,14 +91,14 @@ contact:
   page_title: "Discover Our Culinary Experience"
   section_title: "Discover Our Culinary Experience"
 
-  left_title: "Contact Us"
+  left_title: "Contact us"
   address_lines:
     - "Ram Quarter, 24 Ryeland Blvd, London SW18 1UN"
   phone: "+442033363106"
   phone_display: "0203 336 3106"
   email: "info@sushimoka.co.uk"
 
-  right_title: "Opening Hours"
+  right_title: "Opening hours"
   hours_lines:
     - "Tuesday to Friday: 12:00-15:00 & 17:00-22:00"
     - "Saturday: 12:00-22:00"
@@ -50,16 +110,15 @@ contact:
   map_height_page: 420
 
 announcement:
-  enabled: true          # ✅ 一行开关：true/false
-  id: "xmas-2025"        # 用于记住“关闭”，每次活动换一个 id
-  dismissible: true      # 是否允许用户关闭
+  enabled: true          # true / false
+  id: "xmas-2025"        # change this id for each new campaign
+  dismissible: true
   title: "Holiday notice:"
   message: "Closed on 1st Jan. Reopening 2nd Jan."
-  # 时间用 RFC3339：YYYY-MM-DDTHH:MM:SS+00:00
-  # 建议用英国时间：+00:00（冬令时）或 +01:00（夏令时）
+  # time in RFC3339 with UK timezone offset
   start: "2026-01-01T00:00:00+00:00"
-  end:   "2025-01-01T23:59:59+00:00"
-  # 可选链接（例如跳转到 offers/ 或 reservation）
+  end:   "2026-01-01T23:59:59+00:00"
+  # optional link
   #link:
   #  label: "View details"
   #  url: "/offers/"

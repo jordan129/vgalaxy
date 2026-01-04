@@ -2,16 +2,15 @@
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // state per target (food/drinks)
   const state = {
     food: { idx: 0, pages: [] },
     drinks: { idx: 0, pages: [] },
   };
 
-  // fullscreen state
   const fs = {
     open: false,
-    target: null,   // 'food' | 'drinks'
+    target: null,
+    scale: 1, // 缩放倍数
   };
 
   const lightbox = $("#sm-lightbox");
@@ -23,25 +22,13 @@
   function parsePages(imgEl) {
     try {
       return JSON.parse(imgEl.getAttribute("data-pages") || "[]");
-    } catch (e) {
-      return [];
-    }
+    } catch (e) { return []; }
   }
 
-  function setFade(imgEl, nextSrc) {
-    imgEl.classList.add("is-fading");
-    window.setTimeout(() => {
-      imgEl.src = nextSrc;
-      imgEl.classList.remove("is-fading");
-    }, 120);
-  }
-
-  function setThumbActive(target, idx) {
-    const wrap = $(`.sm-thumbs[data-target="${target}"]`);
-    if (!wrap) return;
-    $$(".sm-thumb", wrap).forEach((b) => b.classList.remove("is-active"));
-    const btn = $(`.sm-thumb[data-index="${idx}"]`, wrap);
-    if (btn) btn.classList.add("is-active");
+  // 重置缩放状态
+  function resetZoom() {
+    fs.scale = 1;
+    if (fsImg) fsImg.style.transform = `scale(1)`;
   }
 
   function setViewer(target, idx) {
@@ -54,31 +41,38 @@
     const clamped = (idx + pages.length) % pages.length;
     state[target].idx = clamped;
 
-    setFade(imgEl, pages[clamped]);
-    setThumbActive(target, clamped);
+    // 切换图片主视图
+    imgEl.src = pages[clamped];
+    
+    // 同步缩略图
+    const wrap = $(`.sm-thumbs[data-target="${target}"]`);
+    if (wrap) {
+      $$(".sm-thumb", wrap).forEach((b) => b.classList.remove("is-active"));
+      const btn = $(`.sm-thumb[data-index="${clamped}"]`, wrap);
+      if (btn) btn.classList.add("is-active");
+    }
 
-    // if fullscreen is open and this is the active target, sync it too
+    // 如果全屏模式开启，同步全屏图片并重置缩放
     if (fs.open && fs.target === target) {
       fsImg.src = pages[clamped];
       setFsIndicator(target);
+      resetZoom(); // 切换页面时重置缩放
     }
   }
 
   function setFsIndicator(target) {
     const pages = state[target].pages;
     const idx = state[target].idx;
-    if (!fsIndicator) return;
-    if (!pages.length) {
-      fsIndicator.textContent = "";
-      return;
+    if (fsIndicator) {
+      fsIndicator.textContent = pages.length ? `page ${idx + 1} / ${pages.length}` : "";
     }
-    fsIndicator.textContent = `page ${idx + 1} / ${pages.length}`;
   }
 
   function openFullscreen(target) {
     if (!lightbox || !fsImg) return;
     fs.open = true;
     fs.target = target;
+    resetZoom(); // 打开时确保缩放是1
 
     document.body.classList.add("sm-fs-open");
     lightbox.classList.add("is-open");
@@ -89,17 +83,14 @@
   }
 
   function closeFullscreen() {
-    if (!lightbox) return;
     fs.open = false;
     fs.target = null;
-
     document.body.classList.remove("sm-fs-open");
     lightbox.classList.remove("is-open");
+    resetZoom();
   }
 
   function step(target, delta) {
-    const pages = state[target].pages;
-    if (!pages.length) return;
     setViewer(target, state[target].idx + delta);
   }
 
@@ -108,71 +99,60 @@
     if (!imgEl) return;
 
     state[target].pages = parsePages(imgEl);
-    state[target].idx = 0;
-
-    // arrows
-    $$(`.sm-menu-arrow[data-target="${target}"]`).forEach((btn) => {
-      btn.addEventListener("click", () => {
-        if (btn.classList.contains("sm-menu-arrow-left")) step(target, -1);
-        else step(target, +1);
+    
+    $$(`.sm-arrow[data-target="${target}"]`).forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        step(target, btn.classList.contains("sm-menu-arrow-left") ? -1 : 1);
       });
     });
 
-    // thumbs
     const thumbs = $(`.sm-thumbs[data-target="${target}"]`);
     if (thumbs) {
       $$(".sm-thumb", thumbs).forEach((b) => {
         b.addEventListener("click", () => {
-          const idx = Number(b.getAttribute("data-index") || "0");
-          setViewer(target, idx);
+          setViewer(target, Number(b.getAttribute("data-index") || "0"));
         });
       });
     }
 
-    // click image -> fullscreen
     imgEl.addEventListener("click", () => openFullscreen(target));
   }
 
-  // init
   bindTarget("food");
   bindTarget("drinks");
 
-  // fullscreen arrows
-  if (fsPrev) fsPrev.addEventListener("click", () => fs.target && step(fs.target, -1));
-  if (fsNext) fsNext.addEventListener("click", () => fs.target && step(fs.target, +1));
+  // 全屏翻页按钮
+  if (fsPrev) fsPrev.addEventListener("click", (e) => { e.stopPropagation(); if (fs.target) step(fs.target, -1); });
+  if (fsNext) fsNext.addEventListener("click", (e) => { e.stopPropagation(); if (fs.target) step(fs.target, 1); });
 
-  // close fullscreen on click outside image
+  // 滚轮缩放逻辑
   if (lightbox) {
+    lightbox.addEventListener("wheel", (e) => {
+      if (!fs.open) return;
+      e.preventDefault();
+
+      const delta = e.deltaY > 0 ? -0.15 : 0.15; // 缩放增量
+      let newScale = fs.scale + delta;
+
+      // 限制缩放范围：最小 0.8 倍，最大 4 倍
+      newScale = Math.min(Math.max(0.8, newScale), 4);
+      
+      fs.scale = newScale;
+      fsImg.style.transform = `scale(${fs.scale})`;
+    }, { passive: false });
+
+    // 点击背景关闭灯箱（点击图片本身不关闭，方便用户点击图片缩放）
     lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox || e.target === fsImg) closeFullscreen();
+      if (e.target === lightbox) closeFullscreen();
     });
   }
 
-  // keyboard navigation
+  // 键盘支持
   window.addEventListener("keydown", (e) => {
     if (!fs.open) return;
-
     if (e.key === "Escape") closeFullscreen();
-    if (e.key === "ArrowLeft" && fs.target) step(fs.target, -1);
-    if (e.key === "ArrowRight" && fs.target) step(fs.target, +1);
+    if (e.key === "ArrowLeft") step(fs.target, -1);
+    if (e.key === "ArrowRight") step(fs.target, 1);
   });
-
-  // basic swipe in fullscreen
-  let x0 = null;
-  if (lightbox) {
-    lightbox.addEventListener("touchstart", (e) => {
-      if (!fs.open) return;
-      x0 = e.touches[0].clientX;
-    }, { passive: true });
-
-    lightbox.addEventListener("touchend", (e) => {
-      if (!fs.open || x0 == null || !fs.target) return;
-      const x1 = e.changedTouches[0].clientX;
-      const dx = x1 - x0;
-      x0 = null;
-      if (Math.abs(dx) < 40) return;
-      if (dx > 0) step(fs.target, -1);
-      else step(fs.target, +1);
-    }, { passive: true });
-  }
 })();

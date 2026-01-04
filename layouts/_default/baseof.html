@@ -4,31 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {{- $brand := site.Data.site.brand.name -}}
+{{- $brand := site.Data.site.brand.name | default site.Title -}}
+{{- $page := .Title -}}
+{{- $title := $brand -}}
 
-  {{/* -------------------------
-      SEO title (single-line)
-      Priority:
-      1) .Params.seo_title (optional override)
-      2) .Title (front matter title)
-      3) brand fallback
-     ------------------------- */}}
-  {{- $title := $brand -}}
-  {{- with .Params.seo_title -}}
-    {{- $title = . -}}
-  {{- else -}}
-    {{- if .Title -}}
-      {{- $title = .Title -}}
-    {{- end -}}
+{{- with .Params.seo_title -}}
+  {{- $title = . -}}
+{{- else -}}
+  {{- if and (not .IsHome) $page -}}
+    {{- $title = printf "%s | %s" $page $brand -}}
   {{- end -}}
-  <title>{{ $title }}</title>
+{{- end -}}
 
-  {{/* -------------------------
-      Meta description
-      Priority:
-      1) .Params.description
-      2) site tagline fallback
-     ------------------------- */}}
+<title>{{ $title }}</title>
+
   {{- $desc := "" -}}
   {{- with .Params.description -}}
     {{- $desc = . -}}
@@ -41,12 +30,8 @@
   <meta name="description" content="{{ $desc }}">
   {{- end -}}
 
-  {{/* Canonical */}}
   <link rel="canonical" href="{{ .Permalink }}">
 
-  {{/* -------------------------
-      Open Graph / Twitter
-     ------------------------- */}}
   <meta property="og:site_name" content="{{ $brand }}">
   <meta property="og:title" content="{{ $title }}">
   {{- if $desc -}}
@@ -57,11 +42,6 @@
   <meta property="og:url" content="{{ .Permalink }}">
   <meta name="twitter:card" content="summary_large_image">
 
-  {{/* Social share image:
-      - page-level: .Params.og_image
-      - site-level fallback: site.Data.site.brand.og_image (optional)
-      - final fallback: /images/og.jpg (optional, if you add it)
-   */}}
   {{- $og := "" -}}
   {{- with .Params.og_image -}}
     {{- $og = . -}}
@@ -81,7 +61,18 @@
   {{- end -}}
 
   <link rel="stylesheet" href="/css/site.css">
+
   {{ partial "schema.html" . }}
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Favicons (root paths) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#111111">
 </head>
 
 <body>
@@ -113,27 +104,6 @@
   </div>
 </header>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://sushimoka.co.uk/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Menu",
-      "item": "https://sushimoka.co.uk/menu/"
-    }
-  ]
-}
-</script>
-
 <main class="site-main">
   {{ block "main" . }}{{ end }}
 </main>
@@ -152,27 +122,15 @@
 <script src="/js/menu.js" defer></script>
 {{ end }}
 
-<!-- WebP Support -->
-{{ $images := resources.Match "images/*" }} <!-- 获取所有图片 -->
-{{ range $index, $image := $images }}
-  <picture>
-    <!-- WebP 格式 -->
-    <source srcset="{{ $image | .Resize "1000x800" | .ToWebp | .RelPermalink }} 1000w,
-                    {{ $image | .Resize "800x600" | .ToWebp | .RelPermalink }} 800w,
-                    {{ $image | .Resize "400x300" | .ToWebp | .RelPermalink }} 400w"
-            sizes="(max-width: 1200px) 100vw, (max-width: 800px) 50vw, 33vw" type="image/webp">
-
-    <!-- JPEG 格式 -->
-    <source srcset="{{ $image | .Resize "1000x800" | .RelPermalink }} 1000w,
-                    {{ $image | .Resize "800x600" | .RelPermalink }} 800w,
-                    {{ $image | .Resize "400x300" | .RelPermalink }} 400w"
-            sizes="(max-width: 1200px) 100vw, (max-width: 800px) 50vw, 33vw" type="image/jpeg">
-
-    <!-- 默认 fallback 图片 -->
-    <img src="{{ $image | .Resize "800x600" | .RelPermalink }}" alt="Sushi Moka - Fantastic Sushi in London" />
-  </picture>
-{{ end }}
-
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/service-worker.js').catch(function (err) {
+      console.log('Service Worker registration failed:', err);
+    });
+  });
+}
+</script>
 
 </body>
 </html>
