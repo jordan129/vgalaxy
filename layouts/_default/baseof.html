@@ -91,9 +91,10 @@
 
     <nav class="nav-right" aria-label="primary">
       <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="{{ "/" }}">Services</a>
-      <a class="nav-link" href="{{ "menu/" | relURL }}">Gallery</a>
-      <a class="nav-link" href="{{ "contact/" | relURL }}">Contact</a>
+      <a class="nav-link" href="{{ "services/" | relURL }}">Services</a>
+      <a class="nav-link" href="{{ "gallery/" | relURL }}">Gallery</a>
+      <a class="nav-link" href="/#about-us">About Us</a>
+      <a class="nav-link" href="{{ "contact/" | relURL }}">Contact Us</a>
     </nav>
 
     <div class="nav-backdrop" aria-hidden="true"></div>
@@ -114,7 +115,7 @@
 <script src="/js/slider.js" defer></script>
 {{ end }}
 
-{{ if eq (.Params.page_kind | default "") "menu" }}
+{{ if eq (.Params.page_kind | default "") "gallery" }}
 <script src="/js/menu.js" defer></script>
 {{ end }}
 

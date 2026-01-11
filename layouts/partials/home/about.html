@@ -1,6 +1,6 @@
 {{- $h := site.Data.home -}}
 {{- with $h.about_us -}}
-<section class="sm-section sm-about">
+<section id="about-us" class="sm-section sm-about">
   <div class="sm-wrap sm-about-inner">
     <div class="sm-about-media">
       <img class="sm-about-img" src="{{ .image | relURL }}" alt="{{ .title }}">

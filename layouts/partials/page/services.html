@@ -1,0 +1,194 @@
+<section class="sm-section">
+  <div class="sm-wrap">
+    <h1 class="sm-h1">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="sm-lead">{{ . }}</p>{{ end }}
+
+    {{ with .Params.tabs }}
+      <div class="sm-tabs2" data-tabs>
+        <!-- left: vertical tab buttons (mobile becomes sticky + horizontal scroll via CSS) -->
+        <div class="sm-tabcol" role="tablist" aria-label="Services">
+          {{ range $i, $t := . }}
+            <button
+              class="sm-tab2 {{ if eq $i 0 }}is-active{{ end }}"
+              type="button"
+              role="tab"
+              aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+              aria-controls="panel-{{ $t.id }}"
+              id="tab-{{ $t.id }}"
+              data-tab="{{ $t.id }}"
+            >
+              {{ $t.title }}
+            </button>
+          {{ end }}
+        </div>
+
+        <!-- right: panels -->
+        <div class="sm-panelcol">
+          {{ range $i, $t := . }}
+            <div
+              class="sm-tabpanel2 {{ if eq $i 0 }}is-active{{ end }}"
+              role="tabpanel"
+              id="panel-{{ $t.id }}"
+              aria-labelledby="tab-{{ $t.id }}"
+              {{ if ne $i 0 }}hidden{{ end }}
+              data-panel="{{ $t.id }}"
+            >
+              <div class="sm-service-right" id="{{ $t.id }}">
+                <!-- top: text -->
+                <div class="sm-service-text2">
+                  <h2 class="sm-h2">{{ $t.title }}</h2>
+                  {{ with $t.intro }}
+                    {{ range . }}<p class="sm-p">{{ . }}</p>{{ end }}
+                  {{ end }}
+                </div>
+
+                <!-- bottom: images -->
+                {{ with $t.images }}
+                  <div class="sm-service-images2">
+                    {{ range . }}
+                      <div class="sm-service-image2">
+                        <img src="{{ . | relURL }}" alt="">
+                      </div>
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+
+    {{ with .Params.cta }}
+      <div class="sm-cta">
+        <h2 class="sm-h2">{{ .title }}</h2>
+        <p class="sm-p">{{ .text }}</p>
+        <a class="sm-btn" href="{{ .button_url | relURL }}">{{ .button_text }}</a>
+      </div>
+    {{ end }}
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.querySelector("[data-tabs]");
+  if (!root) return;
+
+  const tabs = Array.from(root.querySelectorAll("[role='tab']"));
+  const panels = Array.from(root.querySelectorAll("[role='tabpanel']"));
+  const tabcol = root.querySelector(".sm-tabcol"); // sticky tabs container on mobile
+
+  if (!tabs.length || !panels.length) return;
+
+  function isMobileNow(){
+    return window.matchMedia("(max-width: 900px)").matches;
+  }
+
+  function getOffset(){
+    // header is sticky; tabs are sticky on mobile
+    const header = document.querySelector(".site-header");
+    const headerH = header ? Math.round(header.getBoundingClientRect().height) : 0;
+    const tabsH = (tabcol && isMobileNow()) ? Math.round(tabcol.getBoundingClientRect().height) : 0;
+
+    // small gap so content isn't glued to sticky bars
+    return headerH + tabsH + 12;
+  }
+
+  function scrollToPanelTop(panel){
+    const y = window.scrollY + panel.getBoundingClientRect().top - getOffset();
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+  }
+
+  function scrollTabIntoView(tabBtn){
+    // On mobile, tab buttons may be horizontally scrollable; keep active one visible
+    if (!tabcol || !isMobileNow()) return;
+    try {
+      tabBtn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    } catch (e) {
+      // no-op for older browsers
+    }
+  }
+
+  function setActiveState(id){
+    tabs.forEach(t => {
+      const on = t.dataset.tab === id;
+      t.classList.toggle("is-active", on);
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.setAttribute("tabindex", on ? "0" : "-1");
+    });
+
+    let activePanel = null;
+    panels.forEach(p => {
+      const on = p.dataset.panel === id;
+      p.classList.toggle("is-active", on);
+      p.hidden = !on;
+      if (on) activePanel = p;
+    });
+
+    return activePanel;
+  }
+
+  function activate(id, opts = {}){
+    const { pushHash = true, scroll = false, focusTab = false } = opts;
+
+    const activePanel = setActiveState(id);
+
+    if (pushHash) history.replaceState(null, "", "#" + id);
+
+    const activeTab = tabs.find(t => t.dataset.tab === id);
+    if (activeTab) {
+      scrollTabIntoView(activeTab);
+      if (focusTab) activeTab.focus({ preventScroll: true });
+    }
+
+    if (scroll && activePanel) {
+      // wait for layout after hidden toggles
+      requestAnimationFrame(() => {
+        // another frame improves stability on some mobile browsers
+        requestAnimationFrame(() => scrollToPanelTop(activePanel));
+      });
+    }
+  }
+
+  // Click: scroll only on mobile
+  tabs.forEach(t => {
+    t.addEventListener("click", () => {
+      activate(t.dataset.tab, { pushHash: true, scroll: isMobileNow(), focusTab: false });
+    });
+  });
+
+  // Optional: keyboard support (left/right/up/down)
+  root.addEventListener("keydown", (e) => {
+    const current = document.activeElement;
+    if (!current || !current.matches("[role='tab']")) return;
+
+    const idx = tabs.indexOf(current);
+    if (idx < 0) return;
+
+    let nextIdx = null;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") nextIdx = Math.min(tabs.length - 1, idx + 1);
+    if (e.key === "ArrowLeft"  || e.key === "ArrowUp")   nextIdx = Math.max(0, idx - 1);
+    if (e.key === "Home") nextIdx = 0;
+    if (e.key === "End")  nextIdx = tabs.length - 1;
+
+    if (nextIdx === null) return;
+
+    e.preventDefault();
+    const nextTab = tabs[nextIdx];
+    activate(nextTab.dataset.tab, { pushHash: true, scroll: isMobileNow(), focusTab: true });
+  });
+
+  // Deep-link by hash: /services/#merchandising
+  const hash = (location.hash || "").replace("#", "");
+  const hasHashTab = hash && tabs.some(t => t.dataset.tab === hash);
+
+  if (hasHashTab) {
+    // Mobile should scroll to the panel top; desktop doesn't need to scroll
+    activate(hash, { pushHash: false, scroll: isMobileNow(), focusTab: false });
+  } else {
+    // Ensure first tab active state is coherent (tabindex etc.)
+    const first = tabs[0].dataset.tab;
+    activate(first, { pushHash: false, scroll: false, focusTab: false });
+  }
+});
+</script>
