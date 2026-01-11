@@ -5,7 +5,7 @@ disableKinds: ["taxonomy", "term"]
 enableRobotsTXT: true
 
 params:
-  phone: "020 7438 2026"
+  phone: "02078465808"
   address: "12 John Prince's Street, London, W1G 0JR"
   streetAddress: "12 John Prince's Street"
   addressLocality: "London"
