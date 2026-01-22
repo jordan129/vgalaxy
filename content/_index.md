@@ -1,4 +1,4 @@
 ---
 title: "Vgalaxy | W1G"
-description: "The Golden Bund, a celebrated Shanghai-style restaurant in London, has been delighting customers with authentic Shanghai cuisine for past years."
+description: "Vgalaxy is a provider of electric vehicle charging cable solutions, focused on supporting the growing demand for safe and reliable EV charging."
 ---
